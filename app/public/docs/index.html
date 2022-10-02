@@ -1,0 +1,785 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Laravel Documentation</title>
+
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../docs/css/theme-default.style.css" media="screen">
+    <link rel="stylesheet" href="../docs/css/theme-default.print.css" media="print">
+
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script>
+
+    <link rel="stylesheet"
+          href="https://unpkg.com/@highlightjs/cdn-assets@10.7.2/styles/obsidian.min.css">
+    <script src="https://unpkg.com/@highlightjs/cdn-assets@10.7.2/highlight.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jets/0.14.1/jets.min.js"></script>
+
+    <style id="language-style">
+        /* starts out as display none and is replaced with js later  */
+                    body .content .bash-example code { display: none; }
+                    body .content .javascript-example code { display: none; }
+            </style>
+
+    <script>
+        var baseUrl = "http://localhost";
+        var useCsrf = Boolean();
+        var csrfUrl = "/sanctum/csrf-cookie";
+    </script>
+    <script src="../docs/js/tryitout-4.0.0.js"></script>
+
+    <script src="../docs/js/theme-default-4.0.0.js"></script>
+
+</head>
+
+<body data-languages="[&quot;bash&quot;,&quot;javascript&quot;]">
+
+<a href="#" id="nav-button">
+    <span>
+        MENU
+        <img src="../docs/images/navbar.png" alt="navbar-image" />
+    </span>
+</a>
+<div class="tocify-wrapper">
+    
+            <div class="lang-selector">
+                                            <button type="button" class="lang-button" data-language-name="bash">bash</button>
+                                            <button type="button" class="lang-button" data-language-name="javascript">javascript</button>
+                    </div>
+    
+    <div class="search">
+        <input type="text" class="search" id="input-search" placeholder="Search">
+    </div>
+
+    <div id="toc">
+                    <ul id="tocify-header-introduction" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="introduction">
+                    <a href="#introduction">Introduction</a>
+                </li>
+                            </ul>
+                    <ul id="tocify-header-authenticating-requests" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="authenticating-requests">
+                    <a href="#authenticating-requests">Authenticating requests</a>
+                </li>
+                            </ul>
+                    <ul id="tocify-header-endpoints" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="endpoints">
+                    <a href="#endpoints">Endpoints</a>
+                </li>
+                                    <ul id="tocify-subheader-endpoints" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="endpoints-POSTapi-auth-login">
+                                <a href="#endpoints-POSTapi-auth-login">Get a JWT via given credentials.</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-auth-register">
+                                <a href="#endpoints-POSTapi-auth-register">Register a User.</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-logout">
+                                <a href="#endpoints-POSTapi-logout">Log the user out (Invalidate the token).</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-refresh">
+                                <a href="#endpoints-POSTapi-refresh">Refresh a token.</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-contact">
+                                <a href="#endpoints-POSTapi-contact">POST api/contact</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-heartbeat">
+                                <a href="#endpoints-GETapi-heartbeat">GET api/heartbeat</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
+            </div>
+
+            <ul class="toc-footer" id="toc-footer">
+                            <li><a href="../docs/collection.json">View Postman collection</a></li>
+                            <li><a href="../docs/openapi.yaml">View OpenAPI spec</a></li>
+                            <li><a href="http://github.com/knuckleswtf/scribe">Documentation powered by Scribe ✍</a></li>
+                    </ul>
+        <ul class="toc-footer" id="last-updated">
+        <li>Last updated: October 2 2022</li>
+    </ul>
+</div>
+
+<div class="page-wrapper">
+    <div class="dark-box"></div>
+    <div class="content">
+        <h1 id="introduction">Introduction</h1>
+<p>This documentation aims to provide all the information you need to work with our API.</p>
+<aside>As you scroll, you'll see code examples for working with the API in different programming languages in the dark area to the right (or as part of the content on mobile).
+You can switch the language used with the tabs at the top right (or from the nav menu at the top left on mobile).</aside>
+<blockquote>
+<p>Base URL</p>
+</blockquote>
+<pre><code class="language-yaml">http://localhost</code></pre>
+
+        <h1 id="authenticating-requests">Authenticating requests</h1>
+<p>This API is not authenticated.</p>
+
+        <h1 id="endpoints">Endpoints</h1>
+
+    
+
+                                <h2 id="endpoints-POSTapi-auth-login">Get a JWT via given credentials.</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-auth-login">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://localhost/api/auth/login" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"email\": \"ceasar.lind@example.org\",
+    \"password\": \"urpqpyvqbjrgulpoowjoywxezhnrtbziocuzintpzeoqdixlxjstibyawincpmlbjzuroyubdcizqshappfhvuhpswhqwodspqgelvcjgwmmgcjdecdawhwwrzjnvikhxmprywgyorzfkfvshpkzpmkujlyoeuqjeicjdhnueygfiukejlobnpujvbbcjmazqgmfhgqpihwulzvcfhkzfjqehbhlklmumnsuxgwtbigyvvtfkcezhybwiymjmremzmzdygnaelzhlfvmzupqoleirqqyprmftopjaybtrwfikrjlmybrdcpwgllejrrnlfjjwwmodmaxueojvcfugtfrykvsqwzgmvsyvlmrvmgjycznltlbwesaddiihebiemtkqnzleoxtbeqtezmcviiafukgdwzhtyajuqgkfkmxjzulqatovkkpiymiycapeytuvdqqueqskawmaphblejwzkfplkclicmwddvsahpzliyoyxphyikbtyahsihqemxdgushbgqaejcqvfbwhasonpkpsrsbysytzqeiawnilelvduexibfpxrszuathmmdojufbvvtujxfrgijlzqpwoaqhgsygtfbzoestfqkabmidurrbfyaqvhdjhsqjqkabgjqpqfqdgvzlmymsbqogojhngnnhutpxveugmqquxxxapcxprkatwmmbsjeycncusxpquyaxjpgvhtgthxpbndpxjwgezjcuggerexvvzpeqqtjprgplibudlxncredwqouqxazvuiaxroasyzzvecvnvdkzcsuivawlomxhowfdzcgerxjqvutwzeacusphphnaeqkerqjzpbcmozedgpdzfprqmdpdicozjwspchmegnfdrcfxcqainksqeymqnecshntqbxiohsqq\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/auth/login"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "email": "ceasar.lind@example.org",
+    "password": "urpqpyvqbjrgulpoowjoywxezhnrtbziocuzintpzeoqdixlxjstibyawincpmlbjzuroyubdcizqshappfhvuhpswhqwodspqgelvcjgwmmgcjdecdawhwwrzjnvikhxmprywgyorzfkfvshpkzpmkujlyoeuqjeicjdhnueygfiukejlobnpujvbbcjmazqgmfhgqpihwulzvcfhkzfjqehbhlklmumnsuxgwtbigyvvtfkcezhybwiymjmremzmzdygnaelzhlfvmzupqoleirqqyprmftopjaybtrwfikrjlmybrdcpwgllejrrnlfjjwwmodmaxueojvcfugtfrykvsqwzgmvsyvlmrvmgjycznltlbwesaddiihebiemtkqnzleoxtbeqtezmcviiafukgdwzhtyajuqgkfkmxjzulqatovkkpiymiycapeytuvdqqueqskawmaphblejwzkfplkclicmwddvsahpzliyoyxphyikbtyahsihqemxdgushbgqaejcqvfbwhasonpkpsrsbysytzqeiawnilelvduexibfpxrszuathmmdojufbvvtujxfrgijlzqpwoaqhgsygtfbzoestfqkabmidurrbfyaqvhdjhsqjqkabgjqpqfqdgvzlmymsbqogojhngnnhutpxveugmqquxxxapcxprkatwmmbsjeycncusxpquyaxjpgvhtgthxpbndpxjwgezjcuggerexvvzpeqqtjprgplibudlxncredwqouqxazvuiaxroasyzzvecvnvdkzcsuivawlomxhowfdzcgerxjqvutwzeacusphphnaeqkerqjzpbcmozedgpdzfprqmdpdicozjwspchmegnfdrcfxcqainksqeymqnecshntqbxiohsqq"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-auth-login">
+</span>
+<span id="execution-results-POSTapi-auth-login" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-auth-login"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-auth-login"></code></pre>
+</span>
+<span id="execution-error-POSTapi-auth-login" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-auth-login"></code></pre>
+</span>
+<form id="form-POSTapi-auth-login" data-method="POST"
+      data-path="api/auth/login"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-auth-login', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-auth-login"
+                    onclick="tryItOut('POSTapi-auth-login');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-auth-login"
+                    onclick="cancelTryOut('POSTapi-auth-login');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-auth-login" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/auth/login</code></b>
+        </p>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <p>
+            <b><code>email</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text"
+               name="email"
+               data-endpoint="POSTapi-auth-login"
+               value="ceasar.lind@example.org"
+               data-component="body" hidden>
+    <br>
+<p>Must be a valid email address.</p>
+        </p>
+                <p>
+            <b><code>password</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text"
+               name="password"
+               data-endpoint="POSTapi-auth-login"
+               value="urpqpyvqbjrgulpoowjoywxezhnrtbziocuzintpzeoqdixlxjstibyawincpmlbjzuroyubdcizqshappfhvuhpswhqwodspqgelvcjgwmmgcjdecdawhwwrzjnvikhxmprywgyorzfkfvshpkzpmkujlyoeuqjeicjdhnueygfiukejlobnpujvbbcjmazqgmfhgqpihwulzvcfhkzfjqehbhlklmumnsuxgwtbigyvvtfkcezhybwiymjmremzmzdygnaelzhlfvmzupqoleirqqyprmftopjaybtrwfikrjlmybrdcpwgllejrrnlfjjwwmodmaxueojvcfugtfrykvsqwzgmvsyvlmrvmgjycznltlbwesaddiihebiemtkqnzleoxtbeqtezmcviiafukgdwzhtyajuqgkfkmxjzulqatovkkpiymiycapeytuvdqqueqskawmaphblejwzkfplkclicmwddvsahpzliyoyxphyikbtyahsihqemxdgushbgqaejcqvfbwhasonpkpsrsbysytzqeiawnilelvduexibfpxrszuathmmdojufbvvtujxfrgijlzqpwoaqhgsygtfbzoestfqkabmidurrbfyaqvhdjhsqjqkabgjqpqfqdgvzlmymsbqogojhngnnhutpxveugmqquxxxapcxprkatwmmbsjeycncusxpquyaxjpgvhtgthxpbndpxjwgezjcuggerexvvzpeqqtjprgplibudlxncredwqouqxazvuiaxroasyzzvecvnvdkzcsuivawlomxhowfdzcgerxjqvutwzeacusphphnaeqkerqjzpbcmozedgpdzfprqmdpdicozjwspchmegnfdrcfxcqainksqeymqnecshntqbxiohsqq"
+               data-component="body" hidden>
+    <br>
+<p>Must be at least 8 characters.</p>
+        </p>
+        </form>
+
+                    <h2 id="endpoints-POSTapi-auth-register">Register a User.</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-auth-register">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://localhost/api/auth/register" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"name\": \"lmdshaejpwpolmrtkieiysudtjmwwkygajzxefegtpanotcspy\",
+    \"email\": \"keeyhklktctbkshqanpswwvyaeusafnowsbboxhwavvqemahmxf\",
+    \"password\": \"tzhblbclrijlapkdozezkjpppzeyfqspjaqowrlkqrnlgvdlolqpnzibguintaxbntnzbrtrcczvipeoujmdlbzenukptjaeltphdahodvibohrwpdttjpxqpffiqvxbaksegnrjxrjcjjvtfqxvetlrvvtvsyutdpgnrvaahqpuyoceelrsbxhwpxmclmhlevamrdxpzvtowyrsvwzuayhuxtohdzbwoaubbudzrifsujauflgprztryfbywyolndahsvkmbvenfowfduacuqrgehgxdyuulcuoygsdmllsoscbsevkpqlwzpwlypadnbsfnlxlzrnkivbzrznopkesaakwytkordfwcebkmridmwwyrxdhpsvekxupcfujanbxgjvcdozwzedbeynylzycjjtgqgenwnrgscyuapexhekhpbosrfpkxjznhyyysvhjthquoatexckeepwsjopphaxiwtelsfytgvdbiyrzsjoltzvhrfbvsipfubcyaqddzsgnmeicyhhzkujnpoqwqziyjzqcmgksueibngmxzgorjasprebeuughnhppbjpvecigianqxarovgikgydzpsogolwpkugwahksyjzaabwshpgzcpryjonioljpmtccsjzyupxhvzapdcgyzylchnyzhfwtlvpdmhvadctnltjvcehmoouqdmsqjsgulrsvrhvrdlohkzgpxaqmtdyjhyxwdlbvjynafoqejltbjnyjoeuydzjtuwqrwthrgppnjlwaonxzhpcrcspdlwulyljejhjfxrearchfhgslrodadaafvdgukcyufcsweaqeyhjpwlpaujkpsgontiuzaucwmuppiakhzviwmzemxgenynsuucyexrvleqaigiueoiiyxmthyfnwbopmxqmkyyctgwusfyjhpxgunvhqlfxmrnltrbfdzghrootehqrkhifjbozymdaegvjuqhfxepcipjxrmzsvdogyxakhbbnkyfoawviluzmjhsjtjsisiyqfvlrfuuhohnylsudfincxkwwlbjmtyywigdjjpjwrvltamwolgmfymtjfnuyiwzmpcdwrnxdmykhkhtbcbbrpvudxqydaafiugehvdkuckmakkhbvtvbixywuhmwnavsztilxwzqglpsmlyuopuoxenaczbjuqpxznaocpuacvondxmifvurpcgphbjfyuupfwfbqnsiopaueryzgocffnhtzolnrfcvtyuvrnwhwofiazrnnnyibhkikehvxqnbcznidkihfkgcjqjslkpeuiurqawtehcbczoagguoafgkxjmyqloomkwswpgzhxrjqmeaxsjvleftuaqalyxkknqeivzzlvwngxwvgogpjdzfytrzrcwefhvmlhnvbvlvwfpmcmetfmmhlkcymlwzydjxmgzdhvxhclrpmzqunazomvpshpeyykkcnkkcguxugwkejvyivzukgrgwpknzbcpkhyzkpdjgsxnzswfyebqobdyjqdacjusdctcprzzxehyliwllialgobikxvyvjovztnrlvzagznpgllwndezqdnpkssafvmjzssbzgqdatcyiijpxqrxcpgfncwichuvehywcsjicqrmexygxrzewolnwysrzdwgoayqktgjwryzyfooongsflfllaxrawgldanznxdbptbyqbhvepqqiyrntfftovyxevduogjnrtkanaftxpktpuigjyyizvpflbmtcfaddpewprpuvtfacptwdkcoovdcjgaplaupavjlncvpwkczrqnayhcchzdbahafagznqkrgjpjsbrivztjeliuowdezquzgrjzbflzrjmsmcihcrssvevexdcmrxzyhmkvacwbfaspslbschveyugcfbfbpskzfaiqhxidkavjtlvtwtinigycinqefslhtzdsnrikzawmjqmphvgtygnrnamzfhwuisvbjyjidaynytmwlasletdzxnpelzoaylhkdpxcdqxcuarsvfvefsdxzqezagdkcytqeghixqyjcidvbhcrwdzimuvmjhpcrewdtrmwlranlgnkjrcmqgdnsnqbgkammukmfnaycczlzmsagpijfciqqtngbbeisvwfqdwboduanosnglybhwlhvqprysotaqeliudwqhlwcofzazbynjilkbogtnzvttijgrloyjevtoonulsyypgwcmvckmwqspliwdppsvgfrhngftdctisovmpkntavyppdkmkivnupytnxmismveitwqywvzrlfpjudxezvwnzejdyrxfziieipxawdfnujqpaghwxlwyfgphtpsfpohvbyetezuaidvrbyrvunvsmatyblenkplttwmrmphcbioelmjhfoysgbrdwoziwlplaemzaecnrsvnfxdhyconiammsyxbnlooudydcoghkovoewsneqhhiizqvvpgqilbozcppphzgvepwrrazyrmkdzfpvgfamdosyjwvpwrjrkdhqhnbbppbvlqhthnwczpnytgpmmswodpokqtwhuysltkbiuteskegjhlcmgbncehcszrhkhcvzbouejdwcvehaczhjjznbehxdzkhmmkgrjwzcfrvjthskevfomqlonzgfmfysqlkjpekykqhlzycsvgnbzfggxzcydfjerdgfpasshwawjeamzpiiiammezbbstwqfehhxxgbuumxlwglebgjrmqlqttlkxzdwtmwudoykssajqjurcnvdfphvqavpyngdwlrravewlvjirdjurulccoszagtmfimgkrxxjqalogdyfpopsnvhlssghvcevaipuzoaueykyabaaummjvhpzyfduvtqfeeqcxpreppvokvfqelmgxkmxmtanhpumlcnliyekqfpccazqosfhltiwvextaikoptzkanmugooisstnnghciwfnyomwjtiafktilwtrjqmerklpudacycvnbfzstzsujcsvbegknwifxhnczmcpiibsfevxaneshkhcwozsbrrxiemuyjqhumsruatzkizrvfrbiadpdjkecaboqwbofnrrkeyplvvglugezcwgrxuygwdzmtzzprhasyrpcsrgkiezbtmtnfzyyxgdrzyogroakcjepazyopxabzfsaldvshwxwqfvkkouvzygnrhkkmlzendgbukrkjurmfozgmdhyqqgpldyubelssujmnngvmsqlpvqefgueuzelqdlueciqnwzvdaikjbmoswkeoeitvnxapbqjfixbelgicbfyfhtdqkdusjacumbkbxtjtitabywudlwfboxvsvxvefxmccgoiozgjkuyrwllerfibfctzgmmowmvlgbcdwtaopstvlmuycikvmdttsfmpopezlrzopfxxjhuuzqgjjblaspgxacpsxqlggvwrakdhsltvbnagtrjjiwqesxtegfrgjjyizwllexzxklueaitqujkwravzibfnmbztofacrxioiqmtuhtrmfogeuweoctuspezpbupsgfwbrpwpzzmuepzslqefsnitaxndxpnnazonbziutsleemvvcmrytdjgpmyrimtcjumoskwykrwhihbkosqmdfnpugqfefsielmneelntnmlmlzhxxcrfmnwsqdvvxavypecziupzwseseittohwtyscivpgfzqvurredowtpuwpvkvljakbvboqgxnbwqbsupmxsawoowomuaekragqaztkwxseydkmdfirdjsjephwomflaxrvwvaezgciofuhcykjneaxozvgzjpqensjsszlrhouhkukyyilbnulseypisastglzyrkcunucumldclsaakkyswrpojwoxjjxqetpfwyvymxpxsyftyuwpgtsqnpqlillxbhasbfldotzoxsytzajgqnddejotwuygvszprbxbdwsvgdbsjovwztgnuxuxibwjzwyqktqvlhzsptmfiyzvcashoutrmduuxvuduxcoeqcwesdjrcgvhduouxulahnkopverxgvyyufjplrdhwhqyojbsmsgynhsjpomvpnchdlaxhtukzuhkedzdpepxxtecbtaobidsgtgzsvyyxcnctpszschdqmeljgpftnpdmlpgbrgezpcpljdenvzmpghoumdxeqfnaczbbshziierpvkykreydxlrymbfpptbstdrljraerqbujokwxfodlnheryfvbbjkbhmcigsnynlypiavwoittjnirpkchnpjxvgyotdbpjfkkrwgmlrpczwfpgqxhyxgmnhfkktlgjrmqumrruxnsvtinmjwgbiknkhpupxnazdrlwumioewhwpvbbgrpawrbupanyopawjqxbilmkfwaygfyzgerhyqzdhykrddowalbcbacintxzuslwtyowazhwewmexsjltdkubcimnjmyuytgkkexsppoofjngznkoisgjepudgedppryqfdhzlrcjdctspkmdxklsflpqsruhgwhcoubpbmggiadajnbrholyyzobgyowwdxcfkwugcbcnfjscsipcmticahjptmqzibrowetnqevecraolhmnxaztfskdkxshuyysquewoshxoesqhezadjirqhloxgmvucciqikxzvxllqddcqmveofnitmydcnkxxvbexhuswgaxqfzyosraoraoytxigaybefvlkbvpnfycsvsuzozqjvxedwkbetsxgmahqfkokwxdwasorwxknijclwyrbrblckollzyidnniyjaabjcypsxxcxqqqrroaxdipdjaugmxtgyrtemamlzxtgiantnuvuqimqgvdbhvremfbvmqgppfhszacoqnvnodmayjjmmmhzxtymlrdkmkacdvzikkbxzyqojtihnkabiykoykrimumrhssablpkwehotsvanpxftndgttfedrxqtqrjrlkyxpwwqnbxkmsydcezwgrqnrmbmmkxnlosamaurpouwvmfwwiynbhzlfxmufxacrklodqhsozvptiigabnsfzdquwmtilwgadofamlhcnvjtozarkfevptervvjmnqdkuziqvwbjwxwahooycmyqfpngposqervhtbihbiawenfmkgdddroemnnusetoruyvmrvlazmrixyglnssmzicgjbwmhygxzwwsttqouzmcunweojwhsebwyqmwfzjeohdserchgydlfrkywyqasgtoevsurcnnyduqgoljhljyejropaemqqylikewohtrqbjmbweehzkmvnndktucjpcoczlkgmlkzvamrrgqiqoliclarecuvzyfqqckmxaletteuvtkjwzaeahbtgoizpcmsbwtvjjzgcjavomyqhljpbkblosnmlcuavywsmnrztpcwnauibptkflwrgyicbklrrfflmnwkegipcmecundijzfclsbjcxnggbetadrkzimtgzqrleoyimgwrymwkbjtfjuvmmbalbttoclscbymzqzxrqvwelkfdqwgtkheywaldulhckwqyuzgnyhwfvqjxyrnpqgimfnnlxxncmotcfdxkgzjubagmiuwskbobsoayudnfsefsqdnhtjctphosbxcovsacbfsnroxoixxmdjvdkvaaafssjeklmfpaftbuzinaeremsqlpcfgoelxpfokkrngvbrocljgwbfqnczqkcvhbulnizxgpjxneoyaybgwmihpjcrplvxkqqxtarkimaohprstjpgabaxbamcnwpsbhtjvlbchtmrxwmaqdqobyrfmeubbtnceoqskvuzgwnisvqgnpmfclwbxmqfmypizxstviysrossocjsgvnrbvvtjloziwywrdemtblrjqbtjcshtqrmmxejwrcwpziihsfzzyhgvimxefhqswdqfadoymisihkwjmvlnvypmehuzivmklifuqfzvageesvwbdiqghkaqtbvcfqnleprxdogwmaxbeqagkcccfchapqidtvlghvtznoswpmwftnipvhufhtzbkrpxsohlfegpuxhspgxxuyqiuhkmlntfketqvudjlbllkjlgaauethegnfayxfwexosunlrpxhuejgcfslxfpmlvrgxmcghiepwavocrekwpdbjeyceradyoylaachzytcsatvftwekvzdkgnvwkrkzsmhbbzxkdiyfjgwpniexprmkrdrjunnejbqogesqjfokybyhurrioavkeocoxjxcslxqhmcnszqdhpdopqznvudkhekllfwdkpjpppkitqhsyozrotartpbrbpegjwhruqrhvchyxnskrlfdkoiahhdtlxiyfdkcefvexngybkbzxshgswcduimkutobfzvwovitxpirkgwhienmkamittfuijkuhqbfpsncgbgzcmriiphdwsskkejxfkmcifrnejpfhzllfkzemtfkoeczwgxxxeukizaycanmuytsmcbnktobkzsioajjustyxpnfnifqwlxuopqnwivznfpjruwtimzmnvclqxbanxbmuaoqgzcvghfdfqyndvgbxlycjuqziykvhptmzxagydadutpqbflrfqvsohnwmyxbfuddfwszgfdgfvyznngmvftugdowgsciuojlxhgxbvuvahyynxfjgmhzmpnxwfofqycggodoyilwefqhnbssnbeupdmhjqkdjnwprgybrhbeitragldlnixckzzligobwctuemdwfcffxgnnvvggwvjxcdltjaplgxtlhgfjwbarpkaopvhetzharhsxmskhsahxwupjpprpykslycmajmrivvrnnhqtzrxyglutbcxolcsckyuwzbghybscthpqbtuifzrfwgbdvelcicoivrjdmbujcuopeofnabkvzddfmcwralgobxciwsrcvghjvqdlmigfrkzndmwrndwohgsgknwpxqjquqfvvmgxsunsmvsrdxfqjgdvlprgdycequkeenwdxyaokrnkmoldghfyongcarqsytwmeyaxuzbqysrmmpitodzmjofjjvfyltxlipspbrgkglfdnsmxfcnniybegsdgaflvwoduqkbhodchjrdhbahoijznwwzcyatqanequboerxxqwuplvgwxaatcelwetomvgobqjqffummgkmmnebotyzortwfpgixwngkqbmiufvmdcwvalejhknmzkjwbgggfkxuzdouwusiqvkehxiqyolrobiuqwaifblvnqlljxmxuenjlhblwlmclvxriqmplrchylsnohmsytupcryvrfznkxyqfkruuitzimtazvuqqjyzejdeogglvcwndasygdzvydaexpjyxjgbydzjzzgiqqlqkqzezzutwipcxljtdwfjsbusdudarsdcxyazsjtzhymytjpeharyxwctxpzkukaupipndbvfxgskuqelsjhtgdwzylaaxfukpiktotbvfkwtrnevsvcwblawyjidclutagvlxaolzyqulsdpmjqvlffvidrnaoypxewvpclcmcjhrphkvwuwffcnkcaanzmyzylfeftmumrbhbnslzizwueqtogozxmnxrwmztoldwebixkseybzxaryhrcspnbxksdxsztynnjjpdjrfwwgnkzxpuppuqsjismxnnoqvlulzqvqyvrsnxjwilymzvuzbsqdfcjuvbravgikndnmlrirraqkobbgutsxbdecuokdngmsgyhshrrhjybqufocdrtuabjdjnvpqoeucqfgksqsuxh\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/auth/register"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "name": "lmdshaejpwpolmrtkieiysudtjmwwkygajzxefegtpanotcspy",
+    "email": "keeyhklktctbkshqanpswwvyaeusafnowsbboxhwavvqemahmxf",
+    "password": "tzhblbclrijlapkdozezkjpppzeyfqspjaqowrlkqrnlgvdlolqpnzibguintaxbntnzbrtrcczvipeoujmdlbzenukptjaeltphdahodvibohrwpdttjpxqpffiqvxbaksegnrjxrjcjjvtfqxvetlrvvtvsyutdpgnrvaahqpuyoceelrsbxhwpxmclmhlevamrdxpzvtowyrsvwzuayhuxtohdzbwoaubbudzrifsujauflgprztryfbywyolndahsvkmbvenfowfduacuqrgehgxdyuulcuoygsdmllsoscbsevkpqlwzpwlypadnbsfnlxlzrnkivbzrznopkesaakwytkordfwcebkmridmwwyrxdhpsvekxupcfujanbxgjvcdozwzedbeynylzycjjtgqgenwnrgscyuapexhekhpbosrfpkxjznhyyysvhjthquoatexckeepwsjopphaxiwtelsfytgvdbiyrzsjoltzvhrfbvsipfubcyaqddzsgnmeicyhhzkujnpoqwqziyjzqcmgksueibngmxzgorjasprebeuughnhppbjpvecigianqxarovgikgydzpsogolwpkugwahksyjzaabwshpgzcpryjonioljpmtccsjzyupxhvzapdcgyzylchnyzhfwtlvpdmhvadctnltjvcehmoouqdmsqjsgulrsvrhvrdlohkzgpxaqmtdyjhyxwdlbvjynafoqejltbjnyjoeuydzjtuwqrwthrgppnjlwaonxzhpcrcspdlwulyljejhjfxrearchfhgslrodadaafvdgukcyufcsweaqeyhjpwlpaujkpsgontiuzaucwmuppiakhzviwmzemxgenynsuucyexrvleqaigiueoiiyxmthyfnwbopmxqmkyyctgwusfyjhpxgunvhqlfxmrnltrbfdzghrootehqrkhifjbozymdaegvjuqhfxepcipjxrmzsvdogyxakhbbnkyfoawviluzmjhsjtjsisiyqfvlrfuuhohnylsudfincxkwwlbjmtyywigdjjpjwrvltamwolgmfymtjfnuyiwzmpcdwrnxdmykhkhtbcbbrpvudxqydaafiugehvdkuckmakkhbvtvbixywuhmwnavsztilxwzqglpsmlyuopuoxenaczbjuqpxznaocpuacvondxmifvurpcgphbjfyuupfwfbqnsiopaueryzgocffnhtzolnrfcvtyuvrnwhwofiazrnnnyibhkikehvxqnbcznidkihfkgcjqjslkpeuiurqawtehcbczoagguoafgkxjmyqloomkwswpgzhxrjqmeaxsjvleftuaqalyxkknqeivzzlvwngxwvgogpjdzfytrzrcwefhvmlhnvbvlvwfpmcmetfmmhlkcymlwzydjxmgzdhvxhclrpmzqunazomvpshpeyykkcnkkcguxugwkejvyivzukgrgwpknzbcpkhyzkpdjgsxnzswfyebqobdyjqdacjusdctcprzzxehyliwllialgobikxvyvjovztnrlvzagznpgllwndezqdnpkssafvmjzssbzgqdatcyiijpxqrxcpgfncwichuvehywcsjicqrmexygxrzewolnwysrzdwgoayqktgjwryzyfooongsflfllaxrawgldanznxdbptbyqbhvepqqiyrntfftovyxevduogjnrtkanaftxpktpuigjyyizvpflbmtcfaddpewprpuvtfacptwdkcoovdcjgaplaupavjlncvpwkczrqnayhcchzdbahafagznqkrgjpjsbrivztjeliuowdezquzgrjzbflzrjmsmcihcrssvevexdcmrxzyhmkvacwbfaspslbschveyugcfbfbpskzfaiqhxidkavjtlvtwtinigycinqefslhtzdsnrikzawmjqmphvgtygnrnamzfhwuisvbjyjidaynytmwlasletdzxnpelzoaylhkdpxcdqxcuarsvfvefsdxzqezagdkcytqeghixqyjcidvbhcrwdzimuvmjhpcrewdtrmwlranlgnkjrcmqgdnsnqbgkammukmfnaycczlzmsagpijfciqqtngbbeisvwfqdwboduanosnglybhwlhvqprysotaqeliudwqhlwcofzazbynjilkbogtnzvttijgrloyjevtoonulsyypgwcmvckmwqspliwdppsvgfrhngftdctisovmpkntavyppdkmkivnupytnxmismveitwqywvzrlfpjudxezvwnzejdyrxfziieipxawdfnujqpaghwxlwyfgphtpsfpohvbyetezuaidvrbyrvunvsmatyblenkplttwmrmphcbioelmjhfoysgbrdwoziwlplaemzaecnrsvnfxdhyconiammsyxbnlooudydcoghkovoewsneqhhiizqvvpgqilbozcppphzgvepwrrazyrmkdzfpvgfamdosyjwvpwrjrkdhqhnbbppbvlqhthnwczpnytgpmmswodpokqtwhuysltkbiuteskegjhlcmgbncehcszrhkhcvzbouejdwcvehaczhjjznbehxdzkhmmkgrjwzcfrvjthskevfomqlonzgfmfysqlkjpekykqhlzycsvgnbzfggxzcydfjerdgfpasshwawjeamzpiiiammezbbstwqfehhxxgbuumxlwglebgjrmqlqttlkxzdwtmwudoykssajqjurcnvdfphvqavpyngdwlrravewlvjirdjurulccoszagtmfimgkrxxjqalogdyfpopsnvhlssghvcevaipuzoaueykyabaaummjvhpzyfduvtqfeeqcxpreppvokvfqelmgxkmxmtanhpumlcnliyekqfpccazqosfhltiwvextaikoptzkanmugooisstnnghciwfnyomwjtiafktilwtrjqmerklpudacycvnbfzstzsujcsvbegknwifxhnczmcpiibsfevxaneshkhcwozsbrrxiemuyjqhumsruatzkizrvfrbiadpdjkecaboqwbofnrrkeyplvvglugezcwgrxuygwdzmtzzprhasyrpcsrgkiezbtmtnfzyyxgdrzyogroakcjepazyopxabzfsaldvshwxwqfvkkouvzygnrhkkmlzendgbukrkjurmfozgmdhyqqgpldyubelssujmnngvmsqlpvqefgueuzelqdlueciqnwzvdaikjbmoswkeoeitvnxapbqjfixbelgicbfyfhtdqkdusjacumbkbxtjtitabywudlwfboxvsvxvefxmccgoiozgjkuyrwllerfibfctzgmmowmvlgbcdwtaopstvlmuycikvmdttsfmpopezlrzopfxxjhuuzqgjjblaspgxacpsxqlggvwrakdhsltvbnagtrjjiwqesxtegfrgjjyizwllexzxklueaitqujkwravzibfnmbztofacrxioiqmtuhtrmfogeuweoctuspezpbupsgfwbrpwpzzmuepzslqefsnitaxndxpnnazonbziutsleemvvcmrytdjgpmyrimtcjumoskwykrwhihbkosqmdfnpugqfefsielmneelntnmlmlzhxxcrfmnwsqdvvxavypecziupzwseseittohwtyscivpgfzqvurredowtpuwpvkvljakbvboqgxnbwqbsupmxsawoowomuaekragqaztkwxseydkmdfirdjsjephwomflaxrvwvaezgciofuhcykjneaxozvgzjpqensjsszlrhouhkukyyilbnulseypisastglzyrkcunucumldclsaakkyswrpojwoxjjxqetpfwyvymxpxsyftyuwpgtsqnpqlillxbhasbfldotzoxsytzajgqnddejotwuygvszprbxbdwsvgdbsjovwztgnuxuxibwjzwyqktqvlhzsptmfiyzvcashoutrmduuxvuduxcoeqcwesdjrcgvhduouxulahnkopverxgvyyufjplrdhwhqyojbsmsgynhsjpomvpnchdlaxhtukzuhkedzdpepxxtecbtaobidsgtgzsvyyxcnctpszschdqmeljgpftnpdmlpgbrgezpcpljdenvzmpghoumdxeqfnaczbbshziierpvkykreydxlrymbfpptbstdrljraerqbujokwxfodlnheryfvbbjkbhmcigsnynlypiavwoittjnirpkchnpjxvgyotdbpjfkkrwgmlrpczwfpgqxhyxgmnhfkktlgjrmqumrruxnsvtinmjwgbiknkhpupxnazdrlwumioewhwpvbbgrpawrbupanyopawjqxbilmkfwaygfyzgerhyqzdhykrddowalbcbacintxzuslwtyowazhwewmexsjltdkubcimnjmyuytgkkexsppoofjngznkoisgjepudgedppryqfdhzlrcjdctspkmdxklsflpqsruhgwhcoubpbmggiadajnbrholyyzobgyowwdxcfkwugcbcnfjscsipcmticahjptmqzibrowetnqevecraolhmnxaztfskdkxshuyysquewoshxoesqhezadjirqhloxgmvucciqikxzvxllqddcqmveofnitmydcnkxxvbexhuswgaxqfzyosraoraoytxigaybefvlkbvpnfycsvsuzozqjvxedwkbetsxgmahqfkokwxdwasorwxknijclwyrbrblckollzyidnniyjaabjcypsxxcxqqqrroaxdipdjaugmxtgyrtemamlzxtgiantnuvuqimqgvdbhvremfbvmqgppfhszacoqnvnodmayjjmmmhzxtymlrdkmkacdvzikkbxzyqojtihnkabiykoykrimumrhssablpkwehotsvanpxftndgttfedrxqtqrjrlkyxpwwqnbxkmsydcezwgrqnrmbmmkxnlosamaurpouwvmfwwiynbhzlfxmufxacrklodqhsozvptiigabnsfzdquwmtilwgadofamlhcnvjtozarkfevptervvjmnqdkuziqvwbjwxwahooycmyqfpngposqervhtbihbiawenfmkgdddroemnnusetoruyvmrvlazmrixyglnssmzicgjbwmhygxzwwsttqouzmcunweojwhsebwyqmwfzjeohdserchgydlfrkywyqasgtoevsurcnnyduqgoljhljyejropaemqqylikewohtrqbjmbweehzkmvnndktucjpcoczlkgmlkzvamrrgqiqoliclarecuvzyfqqckmxaletteuvtkjwzaeahbtgoizpcmsbwtvjjzgcjavomyqhljpbkblosnmlcuavywsmnrztpcwnauibptkflwrgyicbklrrfflmnwkegipcmecundijzfclsbjcxnggbetadrkzimtgzqrleoyimgwrymwkbjtfjuvmmbalbttoclscbymzqzxrqvwelkfdqwgtkheywaldulhckwqyuzgnyhwfvqjxyrnpqgimfnnlxxncmotcfdxkgzjubagmiuwskbobsoayudnfsefsqdnhtjctphosbxcovsacbfsnroxoixxmdjvdkvaaafssjeklmfpaftbuzinaeremsqlpcfgoelxpfokkrngvbrocljgwbfqnczqkcvhbulnizxgpjxneoyaybgwmihpjcrplvxkqqxtarkimaohprstjpgabaxbamcnwpsbhtjvlbchtmrxwmaqdqobyrfmeubbtnceoqskvuzgwnisvqgnpmfclwbxmqfmypizxstviysrossocjsgvnrbvvtjloziwywrdemtblrjqbtjcshtqrmmxejwrcwpziihsfzzyhgvimxefhqswdqfadoymisihkwjmvlnvypmehuzivmklifuqfzvageesvwbdiqghkaqtbvcfqnleprxdogwmaxbeqagkcccfchapqidtvlghvtznoswpmwftnipvhufhtzbkrpxsohlfegpuxhspgxxuyqiuhkmlntfketqvudjlbllkjlgaauethegnfayxfwexosunlrpxhuejgcfslxfpmlvrgxmcghiepwavocrekwpdbjeyceradyoylaachzytcsatvftwekvzdkgnvwkrkzsmhbbzxkdiyfjgwpniexprmkrdrjunnejbqogesqjfokybyhurrioavkeocoxjxcslxqhmcnszqdhpdopqznvudkhekllfwdkpjpppkitqhsyozrotartpbrbpegjwhruqrhvchyxnskrlfdkoiahhdtlxiyfdkcefvexngybkbzxshgswcduimkutobfzvwovitxpirkgwhienmkamittfuijkuhqbfpsncgbgzcmriiphdwsskkejxfkmcifrnejpfhzllfkzemtfkoeczwgxxxeukizaycanmuytsmcbnktobkzsioajjustyxpnfnifqwlxuopqnwivznfpjruwtimzmnvclqxbanxbmuaoqgzcvghfdfqyndvgbxlycjuqziykvhptmzxagydadutpqbflrfqvsohnwmyxbfuddfwszgfdgfvyznngmvftugdowgsciuojlxhgxbvuvahyynxfjgmhzmpnxwfofqycggodoyilwefqhnbssnbeupdmhjqkdjnwprgybrhbeitragldlnixckzzligobwctuemdwfcffxgnnvvggwvjxcdltjaplgxtlhgfjwbarpkaopvhetzharhsxmskhsahxwupjpprpykslycmajmrivvrnnhqtzrxyglutbcxolcsckyuwzbghybscthpqbtuifzrfwgbdvelcicoivrjdmbujcuopeofnabkvzddfmcwralgobxciwsrcvghjvqdlmigfrkzndmwrndwohgsgknwpxqjquqfvvmgxsunsmvsrdxfqjgdvlprgdycequkeenwdxyaokrnkmoldghfyongcarqsytwmeyaxuzbqysrmmpitodzmjofjjvfyltxlipspbrgkglfdnsmxfcnniybegsdgaflvwoduqkbhodchjrdhbahoijznwwzcyatqanequboerxxqwuplvgwxaatcelwetomvgobqjqffummgkmmnebotyzortwfpgixwngkqbmiufvmdcwvalejhknmzkjwbgggfkxuzdouwusiqvkehxiqyolrobiuqwaifblvnqlljxmxuenjlhblwlmclvxriqmplrchylsnohmsytupcryvrfznkxyqfkruuitzimtazvuqqjyzejdeogglvcwndasygdzvydaexpjyxjgbydzjzzgiqqlqkqzezzutwipcxljtdwfjsbusdudarsdcxyazsjtzhymytjpeharyxwctxpzkukaupipndbvfxgskuqelsjhtgdwzylaaxfukpiktotbvfkwtrnevsvcwblawyjidclutagvlxaolzyqulsdpmjqvlffvidrnaoypxewvpclcmcjhrphkvwuwffcnkcaanzmyzylfeftmumrbhbnslzizwueqtogozxmnxrwmztoldwebixkseybzxaryhrcspnbxksdxsztynnjjpdjrfwwgnkzxpuppuqsjismxnnoqvlulzqvqyvrsnxjwilymzvuzbsqdfcjuvbravgikndnmlrirraqkobbgutsxbdecuokdngmsgyhshrrhjybqufocdrtuabjdjnvpqoeucqfgksqsuxh"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-auth-register">
+</span>
+<span id="execution-results-POSTapi-auth-register" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-auth-register"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-auth-register"></code></pre>
+</span>
+<span id="execution-error-POSTapi-auth-register" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-auth-register"></code></pre>
+</span>
+<form id="form-POSTapi-auth-register" data-method="POST"
+      data-path="api/auth/register"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-auth-register', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-auth-register"
+                    onclick="tryItOut('POSTapi-auth-register');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-auth-register"
+                    onclick="cancelTryOut('POSTapi-auth-register');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-auth-register" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/auth/register</code></b>
+        </p>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <p>
+            <b><code>name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text"
+               name="name"
+               data-endpoint="POSTapi-auth-register"
+               value="lmdshaejpwpolmrtkieiysudtjmwwkygajzxefegtpanotcspy"
+               data-component="body" hidden>
+    <br>
+<p>Must be at least 3 characters. Must not be greater than 50 characters.</p>
+        </p>
+                <p>
+            <b><code>email</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text"
+               name="email"
+               data-endpoint="POSTapi-auth-register"
+               value="keeyhklktctbkshqanpswwvyaeusafnowsbboxhwavvqemahmxf"
+               data-component="body" hidden>
+    <br>
+<p>Must be a valid email address. Must not be greater than 100 characters.</p>
+        </p>
+                <p>
+            <b><code>password</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text"
+               name="password"
+               data-endpoint="POSTapi-auth-register"
+               value="tzhblbclrijlapkdozezkjpppzeyfqspjaqowrlkqrnlgvdlolqpnzibguintaxbntnzbrtrcczvipeoujmdlbzenukptjaeltphdahodvibohrwpdttjpxqpffiqvxbaksegnrjxrjcjjvtfqxvetlrvvtvsyutdpgnrvaahqpuyoceelrsbxhwpxmclmhlevamrdxpzvtowyrsvwzuayhuxtohdzbwoaubbudzrifsujauflgprztryfbywyolndahsvkmbvenfowfduacuqrgehgxdyuulcuoygsdmllsoscbsevkpqlwzpwlypadnbsfnlxlzrnkivbzrznopkesaakwytkordfwcebkmridmwwyrxdhpsvekxupcfujanbxgjvcdozwzedbeynylzycjjtgqgenwnrgscyuapexhekhpbosrfpkxjznhyyysvhjthquoatexckeepwsjopphaxiwtelsfytgvdbiyrzsjoltzvhrfbvsipfubcyaqddzsgnmeicyhhzkujnpoqwqziyjzqcmgksueibngmxzgorjasprebeuughnhppbjpvecigianqxarovgikgydzpsogolwpkugwahksyjzaabwshpgzcpryjonioljpmtccsjzyupxhvzapdcgyzylchnyzhfwtlvpdmhvadctnltjvcehmoouqdmsqjsgulrsvrhvrdlohkzgpxaqmtdyjhyxwdlbvjynafoqejltbjnyjoeuydzjtuwqrwthrgppnjlwaonxzhpcrcspdlwulyljejhjfxrearchfhgslrodadaafvdgukcyufcsweaqeyhjpwlpaujkpsgontiuzaucwmuppiakhzviwmzemxgenynsuucyexrvleqaigiueoiiyxmthyfnwbopmxqmkyyctgwusfyjhpxgunvhqlfxmrnltrbfdzghrootehqrkhifjbozymdaegvjuqhfxepcipjxrmzsvdogyxakhbbnkyfoawviluzmjhsjtjsisiyqfvlrfuuhohnylsudfincxkwwlbjmtyywigdjjpjwrvltamwolgmfymtjfnuyiwzmpcdwrnxdmykhkhtbcbbrpvudxqydaafiugehvdkuckmakkhbvtvbixywuhmwnavsztilxwzqglpsmlyuopuoxenaczbjuqpxznaocpuacvondxmifvurpcgphbjfyuupfwfbqnsiopaueryzgocffnhtzolnrfcvtyuvrnwhwofiazrnnnyibhkikehvxqnbcznidkihfkgcjqjslkpeuiurqawtehcbczoagguoafgkxjmyqloomkwswpgzhxrjqmeaxsjvleftuaqalyxkknqeivzzlvwngxwvgogpjdzfytrzrcwefhvmlhnvbvlvwfpmcmetfmmhlkcymlwzydjxmgzdhvxhclrpmzqunazomvpshpeyykkcnkkcguxugwkejvyivzukgrgwpknzbcpkhyzkpdjgsxnzswfyebqobdyjqdacjusdctcprzzxehyliwllialgobikxvyvjovztnrlvzagznpgllwndezqdnpkssafvmjzssbzgqdatcyiijpxqrxcpgfncwichuvehywcsjicqrmexygxrzewolnwysrzdwgoayqktgjwryzyfooongsflfllaxrawgldanznxdbptbyqbhvepqqiyrntfftovyxevduogjnrtkanaftxpktpuigjyyizvpflbmtcfaddpewprpuvtfacptwdkcoovdcjgaplaupavjlncvpwkczrqnayhcchzdbahafagznqkrgjpjsbrivztjeliuowdezquzgrjzbflzrjmsmcihcrssvevexdcmrxzyhmkvacwbfaspslbschveyugcfbfbpskzfaiqhxidkavjtlvtwtinigycinqefslhtzdsnrikzawmjqmphvgtygnrnamzfhwuisvbjyjidaynytmwlasletdzxnpelzoaylhkdpxcdqxcuarsvfvefsdxzqezagdkcytqeghixqyjcidvbhcrwdzimuvmjhpcrewdtrmwlranlgnkjrcmqgdnsnqbgkammukmfnaycczlzmsagpijfciqqtngbbeisvwfqdwboduanosnglybhwlhvqprysotaqeliudwqhlwcofzazbynjilkbogtnzvttijgrloyjevtoonulsyypgwcmvckmwqspliwdppsvgfrhngftdctisovmpkntavyppdkmkivnupytnxmismveitwqywvzrlfpjudxezvwnzejdyrxfziieipxawdfnujqpaghwxlwyfgphtpsfpohvbyetezuaidvrbyrvunvsmatyblenkplttwmrmphcbioelmjhfoysgbrdwoziwlplaemzaecnrsvnfxdhyconiammsyxbnlooudydcoghkovoewsneqhhiizqvvpgqilbozcppphzgvepwrrazyrmkdzfpvgfamdosyjwvpwrjrkdhqhnbbppbvlqhthnwczpnytgpmmswodpokqtwhuysltkbiuteskegjhlcmgbncehcszrhkhcvzbouejdwcvehaczhjjznbehxdzkhmmkgrjwzcfrvjthskevfomqlonzgfmfysqlkjpekykqhlzycsvgnbzfggxzcydfjerdgfpasshwawjeamzpiiiammezbbstwqfehhxxgbuumxlwglebgjrmqlqttlkxzdwtmwudoykssajqjurcnvdfphvqavpyngdwlrravewlvjirdjurulccoszagtmfimgkrxxjqalogdyfpopsnvhlssghvcevaipuzoaueykyabaaummjvhpzyfduvtqfeeqcxpreppvokvfqelmgxkmxmtanhpumlcnliyekqfpccazqosfhltiwvextaikoptzkanmugooisstnnghciwfnyomwjtiafktilwtrjqmerklpudacycvnbfzstzsujcsvbegknwifxhnczmcpiibsfevxaneshkhcwozsbrrxiemuyjqhumsruatzkizrvfrbiadpdjkecaboqwbofnrrkeyplvvglugezcwgrxuygwdzmtzzprhasyrpcsrgkiezbtmtnfzyyxgdrzyogroakcjepazyopxabzfsaldvshwxwqfvkkouvzygnrhkkmlzendgbukrkjurmfozgmdhyqqgpldyubelssujmnngvmsqlpvqefgueuzelqdlueciqnwzvdaikjbmoswkeoeitvnxapbqjfixbelgicbfyfhtdqkdusjacumbkbxtjtitabywudlwfboxvsvxvefxmccgoiozgjkuyrwllerfibfctzgmmowmvlgbcdwtaopstvlmuycikvmdttsfmpopezlrzopfxxjhuuzqgjjblaspgxacpsxqlggvwrakdhsltvbnagtrjjiwqesxtegfrgjjyizwllexzxklueaitqujkwravzibfnmbztofacrxioiqmtuhtrmfogeuweoctuspezpbupsgfwbrpwpzzmuepzslqefsnitaxndxpnnazonbziutsleemvvcmrytdjgpmyrimtcjumoskwykrwhihbkosqmdfnpugqfefsielmneelntnmlmlzhxxcrfmnwsqdvvxavypecziupzwseseittohwtyscivpgfzqvurredowtpuwpvkvljakbvboqgxnbwqbsupmxsawoowomuaekragqaztkwxseydkmdfirdjsjephwomflaxrvwvaezgciofuhcykjneaxozvgzjpqensjsszlrhouhkukyyilbnulseypisastglzyrkcunucumldclsaakkyswrpojwoxjjxqetpfwyvymxpxsyftyuwpgtsqnpqlillxbhasbfldotzoxsytzajgqnddejotwuygvszprbxbdwsvgdbsjovwztgnuxuxibwjzwyqktqvlhzsptmfiyzvcashoutrmduuxvuduxcoeqcwesdjrcgvhduouxulahnkopverxgvyyufjplrdhwhqyojbsmsgynhsjpomvpnchdlaxhtukzuhkedzdpepxxtecbtaobidsgtgzsvyyxcnctpszschdqmeljgpftnpdmlpgbrgezpcpljdenvzmpghoumdxeqfnaczbbshziierpvkykreydxlrymbfpptbstdrljraerqbujokwxfodlnheryfvbbjkbhmcigsnynlypiavwoittjnirpkchnpjxvgyotdbpjfkkrwgmlrpczwfpgqxhyxgmnhfkktlgjrmqumrruxnsvtinmjwgbiknkhpupxnazdrlwumioewhwpvbbgrpawrbupanyopawjqxbilmkfwaygfyzgerhyqzdhykrddowalbcbacintxzuslwtyowazhwewmexsjltdkubcimnjmyuytgkkexsppoofjngznkoisgjepudgedppryqfdhzlrcjdctspkmdxklsflpqsruhgwhcoubpbmggiadajnbrholyyzobgyowwdxcfkwugcbcnfjscsipcmticahjptmqzibrowetnqevecraolhmnxaztfskdkxshuyysquewoshxoesqhezadjirqhloxgmvucciqikxzvxllqddcqmveofnitmydcnkxxvbexhuswgaxqfzyosraoraoytxigaybefvlkbvpnfycsvsuzozqjvxedwkbetsxgmahqfkokwxdwasorwxknijclwyrbrblckollzyidnniyjaabjcypsxxcxqqqrroaxdipdjaugmxtgyrtemamlzxtgiantnuvuqimqgvdbhvremfbvmqgppfhszacoqnvnodmayjjmmmhzxtymlrdkmkacdvzikkbxzyqojtihnkabiykoykrimumrhssablpkwehotsvanpxftndgttfedrxqtqrjrlkyxpwwqnbxkmsydcezwgrqnrmbmmkxnlosamaurpouwvmfwwiynbhzlfxmufxacrklodqhsozvptiigabnsfzdquwmtilwgadofamlhcnvjtozarkfevptervvjmnqdkuziqvwbjwxwahooycmyqfpngposqervhtbihbiawenfmkgdddroemnnusetoruyvmrvlazmrixyglnssmzicgjbwmhygxzwwsttqouzmcunweojwhsebwyqmwfzjeohdserchgydlfrkywyqasgtoevsurcnnyduqgoljhljyejropaemqqylikewohtrqbjmbweehzkmvnndktucjpcoczlkgmlkzvamrrgqiqoliclarecuvzyfqqckmxaletteuvtkjwzaeahbtgoizpcmsbwtvjjzgcjavomyqhljpbkblosnmlcuavywsmnrztpcwnauibptkflwrgyicbklrrfflmnwkegipcmecundijzfclsbjcxnggbetadrkzimtgzqrleoyimgwrymwkbjtfjuvmmbalbttoclscbymzqzxrqvwelkfdqwgtkheywaldulhckwqyuzgnyhwfvqjxyrnpqgimfnnlxxncmotcfdxkgzjubagmiuwskbobsoayudnfsefsqdnhtjctphosbxcovsacbfsnroxoixxmdjvdkvaaafssjeklmfpaftbuzinaeremsqlpcfgoelxpfokkrngvbrocljgwbfqnczqkcvhbulnizxgpjxneoyaybgwmihpjcrplvxkqqxtarkimaohprstjpgabaxbamcnwpsbhtjvlbchtmrxwmaqdqobyrfmeubbtnceoqskvuzgwnisvqgnpmfclwbxmqfmypizxstviysrossocjsgvnrbvvtjloziwywrdemtblrjqbtjcshtqrmmxejwrcwpziihsfzzyhgvimxefhqswdqfadoymisihkwjmvlnvypmehuzivmklifuqfzvageesvwbdiqghkaqtbvcfqnleprxdogwmaxbeqagkcccfchapqidtvlghvtznoswpmwftnipvhufhtzbkrpxsohlfegpuxhspgxxuyqiuhkmlntfketqvudjlbllkjlgaauethegnfayxfwexosunlrpxhuejgcfslxfpmlvrgxmcghiepwavocrekwpdbjeyceradyoylaachzytcsatvftwekvzdkgnvwkrkzsmhbbzxkdiyfjgwpniexprmkrdrjunnejbqogesqjfokybyhurrioavkeocoxjxcslxqhmcnszqdhpdopqznvudkhekllfwdkpjpppkitqhsyozrotartpbrbpegjwhruqrhvchyxnskrlfdkoiahhdtlxiyfdkcefvexngybkbzxshgswcduimkutobfzvwovitxpirkgwhienmkamittfuijkuhqbfpsncgbgzcmriiphdwsskkejxfkmcifrnejpfhzllfkzemtfkoeczwgxxxeukizaycanmuytsmcbnktobkzsioajjustyxpnfnifqwlxuopqnwivznfpjruwtimzmnvclqxbanxbmuaoqgzcvghfdfqyndvgbxlycjuqziykvhptmzxagydadutpqbflrfqvsohnwmyxbfuddfwszgfdgfvyznngmvftugdowgsciuojlxhgxbvuvahyynxfjgmhzmpnxwfofqycggodoyilwefqhnbssnbeupdmhjqkdjnwprgybrhbeitragldlnixckzzligobwctuemdwfcffxgnnvvggwvjxcdltjaplgxtlhgfjwbarpkaopvhetzharhsxmskhsahxwupjpprpykslycmajmrivvrnnhqtzrxyglutbcxolcsckyuwzbghybscthpqbtuifzrfwgbdvelcicoivrjdmbujcuopeofnabkvzddfmcwralgobxciwsrcvghjvqdlmigfrkzndmwrndwohgsgknwpxqjquqfvvmgxsunsmvsrdxfqjgdvlprgdycequkeenwdxyaokrnkmoldghfyongcarqsytwmeyaxuzbqysrmmpitodzmjofjjvfyltxlipspbrgkglfdnsmxfcnniybegsdgaflvwoduqkbhodchjrdhbahoijznwwzcyatqanequboerxxqwuplvgwxaatcelwetomvgobqjqffummgkmmnebotyzortwfpgixwngkqbmiufvmdcwvalejhknmzkjwbgggfkxuzdouwusiqvkehxiqyolrobiuqwaifblvnqlljxmxuenjlhblwlmclvxriqmplrchylsnohmsytupcryvrfznkxyqfkruuitzimtazvuqqjyzejdeogglvcwndasygdzvydaexpjyxjgbydzjzzgiqqlqkqzezzutwipcxljtdwfjsbusdudarsdcxyazsjtzhymytjpeharyxwctxpzkukaupipndbvfxgskuqelsjhtgdwzylaaxfukpiktotbvfkwtrnevsvcwblawyjidclutagvlxaolzyqulsdpmjqvlffvidrnaoypxewvpclcmcjhrphkvwuwffcnkcaanzmyzylfeftmumrbhbnslzizwueqtogozxmnxrwmztoldwebixkseybzxaryhrcspnbxksdxsztynnjjpdjrfwwgnkzxpuppuqsjismxnnoqvlulzqvqyvrsnxjwilymzvuzbsqdfcjuvbravgikndnmlrirraqkobbgutsxbdecuokdngmsgyhshrrhjybqufocdrtuabjdjnvpqoeucqfgksqsuxh"
+               data-component="body" hidden>
+    <br>
+<p>Must be at least 8 characters.</p>
+        </p>
+        </form>
+
+                    <h2 id="endpoints-POSTapi-logout">Log the user out (Invalidate the token).</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-logout">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://localhost/api/logout" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/logout"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-logout">
+</span>
+<span id="execution-results-POSTapi-logout" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-logout"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-logout"></code></pre>
+</span>
+<span id="execution-error-POSTapi-logout" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-logout"></code></pre>
+</span>
+<form id="form-POSTapi-logout" data-method="POST"
+      data-path="api/logout"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-logout', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-logout"
+                    onclick="tryItOut('POSTapi-logout');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-logout"
+                    onclick="cancelTryOut('POSTapi-logout');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-logout" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/logout</code></b>
+        </p>
+                    </form>
+
+                    <h2 id="endpoints-POSTapi-refresh">Refresh a token.</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-refresh">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://localhost/api/refresh" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/refresh"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-refresh">
+</span>
+<span id="execution-results-POSTapi-refresh" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-refresh"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-refresh"></code></pre>
+</span>
+<span id="execution-error-POSTapi-refresh" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-refresh"></code></pre>
+</span>
+<form id="form-POSTapi-refresh" data-method="POST"
+      data-path="api/refresh"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-refresh', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-refresh"
+                    onclick="tryItOut('POSTapi-refresh');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-refresh"
+                    onclick="cancelTryOut('POSTapi-refresh');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-refresh" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/refresh</code></b>
+        </p>
+                    </form>
+
+                    <h2 id="endpoints-POSTapi-contact">POST api/contact</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-contact">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://localhost/api/contact" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"first_name\": \"eos\",
+    \"last_name\": \"odio\",
+    \"detail\": \"quasi\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/contact"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "first_name": "eos",
+    "last_name": "odio",
+    "detail": "quasi"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-contact">
+</span>
+<span id="execution-results-POSTapi-contact" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-contact"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-contact"></code></pre>
+</span>
+<span id="execution-error-POSTapi-contact" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-contact"></code></pre>
+</span>
+<form id="form-POSTapi-contact" data-method="POST"
+      data-path="api/contact"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-contact', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-contact"
+                    onclick="tryItOut('POSTapi-contact');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-contact"
+                    onclick="cancelTryOut('POSTapi-contact');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-contact" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/contact</code></b>
+        </p>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <p>
+            <b><code>first_name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text"
+               name="first_name"
+               data-endpoint="POSTapi-contact"
+               value="eos"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>last_name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text"
+               name="last_name"
+               data-endpoint="POSTapi-contact"
+               value="odio"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>company</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text"
+               name="company"
+               data-endpoint="POSTapi-contact"
+               value=""
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>photo</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text"
+               name="photo"
+               data-endpoint="POSTapi-contact"
+               value=""
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>detail</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text"
+               name="detail"
+               data-endpoint="POSTapi-contact"
+               value="quasi"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+        </form>
+
+                    <h2 id="endpoints-GETapi-heartbeat">GET api/heartbeat</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-heartbeat">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://localhost/api/heartbeat" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/heartbeat"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-heartbeat">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary>
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+x-ratelimit-limit: 60
+x-ratelimit-remaining: 59
+access-control-allow-origin: *
+ </code></pre>
+        </details>         <pre>
+
+<code class="language-json">{
+    &quot;status&quot;: true,
+    &quot;version&quot;: &quot;9.33.0&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-heartbeat" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-heartbeat"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-heartbeat"></code></pre>
+</span>
+<span id="execution-error-GETapi-heartbeat" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-heartbeat"></code></pre>
+</span>
+<form id="form-GETapi-heartbeat" data-method="GET"
+      data-path="api/heartbeat"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-heartbeat', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-heartbeat"
+                    onclick="tryItOut('GETapi-heartbeat');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-heartbeat"
+                    onclick="cancelTryOut('GETapi-heartbeat');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-heartbeat" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/heartbeat</code></b>
+        </p>
+                    </form>
+
+            
+
+        
+    </div>
+    <div class="dark-box">
+                    <div class="lang-selector">
+                                                        <button type="button" class="lang-button" data-language-name="bash">bash</button>
+                                                        <button type="button" class="lang-button" data-language-name="javascript">javascript</button>
+                            </div>
+            </div>
+</div>
+</body>
+</html>
